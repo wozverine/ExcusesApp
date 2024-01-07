@@ -1,4 +1,4 @@
-package com.glitch.simplegames.ui.splash
+package com.glitch.excuser.ui.splash
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

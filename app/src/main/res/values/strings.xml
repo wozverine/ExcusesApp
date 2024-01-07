@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Excuser</string>
+    <string name="select">Select a category</string>
+    <string name="categories">Categories</string>
+
+    <string name="office">Office</string>
+    <string name="funny">Funny</string>
+    <string name="college">College</string>
+    <string name="party">Party</string>
+    <string name="family">Family</string>
+    <string name="gaming">Gaming</string>
+    <string name="children">Children</string>
+    <string name="unbelievable">Unbelievable</string>
 </resources>

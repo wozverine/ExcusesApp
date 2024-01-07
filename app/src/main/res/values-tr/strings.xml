@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Excuser</string>
+    <string name="select">Kategori seçiniz</string>
+    <string name="categories">Kategoriler</string>
+
+    <string name="office">Ofis</string>
+    <string name="funny">Komik</string>
+    <string name="college">Üniversite</string>
+    <string name="party">Parti</string>
+    <string name="family">Aile</string>
+    <string name="gaming">Oyun</string>
+    <string name="children">Çocuklar</string>
+    <string name="unbelievable">İnanılmaz</string>
+</resources>
