@@ -44,7 +44,7 @@ class ExcuseFragment : Fragment(R.layout.fragment_excuse) {
             when (state) {
 
                 is ExcuseState.SuccessState -> {
-                    tvExcuse.text = state.excuseUI.excuse
+                    tvExcuse.text = state.excuseResponse.excuse
                 }
 
                 else -> {

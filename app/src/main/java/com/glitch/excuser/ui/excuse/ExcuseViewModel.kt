@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.glitch.excuser.common.Resource
-import com.glitch.excuser.data.model.response.ExcuseUI
+import com.glitch.excuser.data.model.response.GetExcuseResponse
 import com.glitch.excuser.data.repository.ExcuseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -18,7 +18,7 @@ class ExcuseViewModel @Inject constructor(
 	private var _excuseState = MutableLiveData<ExcuseState>()
 	val excuseState: LiveData<ExcuseState> get() = _excuseState
 
-	private var excuseData: ExcuseUI? = null
+	private var excuseData: GetExcuseResponse? = null
 
 	fun getExcuse(category: String) = viewModelScope.launch {
 		_excuseState.value = ExcuseState.Loading
@@ -28,17 +28,15 @@ class ExcuseViewModel @Inject constructor(
 				excuseData = result.data
 				ExcuseState.SuccessState(result.data)
 			}
-
 			is Resource.Fail -> ExcuseState.EmptyScreen(result.failMessage)
 			is Resource.Error -> ExcuseState.ShowMessage(result.errorMessage)
 		}
 	}
 }
 
-
 sealed interface ExcuseState {
 	data object Loading : ExcuseState
-	data class SuccessState(val excuseUI: ExcuseUI) : ExcuseState
+	data class SuccessState(val excuseResponse: GetExcuseResponse) : ExcuseState
 	data class EmptyScreen(val failMessage: String) : ExcuseState
 	data class ShowMessage(val errorMessage: String) : ExcuseState
 }

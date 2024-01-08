@@ -1,38 +1,31 @@
 package com.glitch.excuser.data.repository
 
-import android.util.Log
 import com.glitch.excuser.common.Resource
-import com.glitch.excuser.data.mapper.mapToExcuseUI
-import com.glitch.excuser.data.model.response.ExcuseUI
 import com.glitch.excuser.data.source.remote.ExcuseService
+import com.glitch.excuser.data.model.response.GetExcuseResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import retrofit2.Response
 
-class ExcuseRepository (
-	private val excuseService: ExcuseService
-){
-	suspend fun getExcuse(category: String): Resource<ExcuseUI> = withContext(Dispatchers.IO) {
-		try {
-			val response = excuseService.getExcuseByCategory("children").body()
+class ExcuseRepository(private val excuseService: ExcuseService) {
 
-			if (response != null) {
-				response.excuse?.excuse?.let { Log.v("ExcuseRepository", it) }
-				when {
-					response.status == 200 && response.excuse != null -> {
-						Resource.Success(response.excuse.mapToExcuseUI())
+	suspend fun getExcuse(category: String): Resource<GetExcuseResponse> =
+		withContext(Dispatchers.IO) {
+			try {
+				val response = excuseService.getExcuseByCategory(category)
+
+				if (response.isSuccessful) {
+					val excuse = response.body()
+					if (excuse != null) {
+						Resource.Success(excuse)
+					} else {
+						Resource.Fail("Excuse is null")
 					}
-					else -> {
-						Resource.Fail(response.message.orEmpty())
-					}
+				} else {
+					Resource.Fail("Unsuccessful response: ${response.code()}")
 				}
-			} else {
-				Resource.Error("Null response received")
+			} catch (e: Exception) {
+				Resource.Error(e.message.orEmpty())
 			}
-		} catch (e: Exception) {
-			// Log the exception for debugging purposes
-			e.printStackTrace()
-			Resource.Error(e.message.orEmpty())
 		}
-	}
-
 }
