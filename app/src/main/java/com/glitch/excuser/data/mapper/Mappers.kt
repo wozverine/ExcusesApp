@@ -1,12 +1,12 @@
 package com.glitch.excuser.data.mapper
 
-/*fun List<CategoryEntity>.mapCategoryEntityToCategoryUI() = map {
-	CategoryUI(
-		categoryId = it.gameId ?: 1,
-		username = it.username.orEmpty(),
-		title = it.title.orEmpty(),
-		highScore = it.highScore ?: 0
-	)
-}*/
+import com.glitch.excuser.data.model.response.Excuse
+import com.glitch.excuser.data.model.response.ExcuseUI
+
+fun Excuse.mapToExcuseUI() = ExcuseUI(
+	id = id ?: 1,
+	category = category.orEmpty(),
+	excuse = excuse.orEmpty(),
+)
 
 
