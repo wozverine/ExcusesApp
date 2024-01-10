@@ -18,9 +18,14 @@
     <string name="another">Başka bir bahane</string>
     <string name="no_connection">İnternet yok</string>
     <string name="url">Kaynak: https://excuser-three.vercel.app/</string>
+
     <string name="language">Dil</string>
     <string name="current_language">tr</string>
-    <string name="tur">Türkçe</string>
+    <string name="tr">Türkçe</string>
     <string name="eng">İnglizce</string>
+    <string name="fren">Fransızca</string>
+    <string name="hin">Hintçe</string>
+    <string name="pt_br">Portekizce</string>
+    <string name="ben">Bengali</string>
     <string name="language_changed">Dil değişti</string>
 </resources>

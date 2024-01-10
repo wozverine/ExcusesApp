@@ -1,6 +1,10 @@
 package com.glitch.excuser.di
 
 import android.content.Context
+import android.util.Log
+import android.widget.Toast
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.glitch.excuser.common.Constants.BASE_URL
 import com.glitch.excuser.data.source.remote.ExcuseService
@@ -16,11 +20,6 @@ import javax.inject.Named
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
-
-@Retention(AnnotationRetention.BINARY)
-@Qualifier
-annotation class Language
-
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
@@ -32,25 +31,19 @@ object NetworkModule {
 
 	@Singleton
 	@Provides
-	@Language
-	fun provideLanguage(): String {
-		// TODO: Retrieve the selected language dynamically (from user preferences, system locale, etc.)
-		return "eng" // Replace with actual logic to get the selected language
-	}
-
-	@Singleton
-	@Provides
-	fun provideOkHttp(chucker: ChuckerInterceptor, @Named("language") language: String): OkHttpClient =
+	fun provideOkHttp(chucker: ChuckerInterceptor, @ApplicationContext context: Context): OkHttpClient =
 		OkHttpClient.Builder().apply {
-			addInterceptor {
-				val builder = it.request().newBuilder()
+			addInterceptor { chain ->
+				val sharedPref = context.getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
+				val language = sharedPref.getString("language", "eng") ?: "eng"
+
+				val builder = chain.request().newBuilder()
 				builder.header("language", language)
-				return@addInterceptor it.proceed(builder.build())
+
+				return@addInterceptor chain.proceed(builder.build())
 			}
 			addInterceptor(chucker)
 		}.build()
-
-
 
 	@Singleton
     @Provides

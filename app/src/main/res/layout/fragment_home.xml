@@ -11,14 +11,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingVertical="16sp"
-        android:text="@string/select"
+        android:text="@string/categories"
         android:textSize="32sp"
         app:layout_constraintEnd_toStartOf="@id/btnLanguage"
         app:layout_constraintBottom_toTopOf="@id/rvCategories"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCategories"

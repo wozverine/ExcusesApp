@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/light_grey"
+    android:paddingVertical="10sp"
+    android:layout_marginHorizontal="40sp"
     android:layout_gravity="center">
 
     <RadioGroup
@@ -23,7 +26,27 @@
             android:id="@+id/rbTur"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tur" />
+            android:text="@string/tr" />
+        <RadioButton
+            android:id="@+id/rbFrench"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fren" />
+        <RadioButton
+            android:id="@+id/rbHin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hin" />
+        <RadioButton
+            android:id="@+id/rbPtbr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pt_br" />
+        <RadioButton
+            android:id="@+id/rbBen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ben" />
     </RadioGroup>
 
     <Button

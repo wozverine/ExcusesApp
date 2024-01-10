@@ -17,9 +17,14 @@
     <string name="another">Another excuse</string>
     <string name="no_connection">No connection</string>
     <string name="url">Source: https://excuser-three.vercel.app/</string>
+
     <string name="language">Language</string>
     <string name="current_language">eng</string>
-    <string name="tur">Turkish</string>
+    <string name="tr">Turkish</string>
     <string name="eng">English</string>
+    <string name="fren">French</string>
+    <string name="hin">Hindi</string>
+    <string name="pt_br">Brazilian Portuguese</string>
+    <string name="ben">Bengali</string>
     <string name="language_changed">Language changed</string>
 </resources>

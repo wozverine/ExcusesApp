@@ -38,7 +38,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 		super.onViewCreated(view, savedInstanceState)
 		sharedPref = requireActivity().getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
 
-		sharedPref.edit().putBoolean("firstTime", true).apply()
 		if (sharedPref.getBoolean("firstTime", true)) {
 			sharedPref.edit().putString("language", getString(R.string.language)).apply()
 			sharedPref.edit().putBoolean("firstTime", false).apply()
@@ -59,6 +58,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 		with(binding) {
 			rvCategories.adapter = categoryAdapter
+			btnLanguage.text = buildString {
+				append(getString(R.string.language))
+				append(" : ")
+				append(sharedPref.getString("language","eng"))
+			}
+			btnLanguage.setOnClickListener {
+				showLanguageDialog()
+			}
 		}
 	}
 
@@ -84,11 +91,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 		with(dialogBinding) {
 			btnSelect.setOnClickListener() {
-				val language = rgLanguage.checkedRadioButtonId
-				sharedPref.edit().putString("language", "tur").apply()
+				val push = when(rgLanguage.checkedRadioButtonId){
+					R.id.rbEng -> "eng"
+					R.id.rbTur -> "tr"
+					R.id.rbFrench -> "fren"
+					R.id.rbHin -> "hin"
+					R.id.rbPtbr -> "pt-br"
+					else -> "ben"
+				}
+				sharedPref.edit().putString("language", push).apply()
 				dialog.dismiss()
 			}
-
 		}
 		dialog.show()
 	}
