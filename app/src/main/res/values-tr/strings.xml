@@ -12,4 +12,15 @@
     <string name="gaming">Oyun</string>
     <string name="children">Çocuklar</string>
     <string name="unbelievable">İnanılmaz</string>
+
+    <string name="error">Hata</string>
+    <string name="ok">Tamam</string>
+    <string name="another">Başka bir bahane</string>
+    <string name="no_connection">İnternet yok</string>
+    <string name="url">Kaynak: https://excuser-three.vercel.app/</string>
+    <string name="language">Dil</string>
+    <string name="current_language">tr</string>
+    <string name="tur">Türkçe</string>
+    <string name="eng">İnglizce</string>
+    <string name="language_changed">Dil değişti</string>
 </resources>

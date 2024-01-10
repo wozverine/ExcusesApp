@@ -5,21 +5,20 @@ import com.glitch.excuser.data.source.remote.ExcuseService
 import com.glitch.excuser.data.model.response.GetExcuseResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Response
 
 class ExcuseRepository(private val excuseService: ExcuseService) {
 
-	suspend fun getExcuse(category: String): Resource<GetExcuseResponse> =
+	suspend fun getExcuse(category: String): Resource<List<GetExcuseResponse>> =
 		withContext(Dispatchers.IO) {
 			try {
 				val response = excuseService.getExcuseByCategory(category)
 
 				if (response.isSuccessful) {
-					val excuse = response.body()
-					if (excuse != null) {
-						Resource.Success(excuse)
+					val excuses = response.body()
+					if (excuses != null) {
+						Resource.Success(excuses)
 					} else {
-						Resource.Fail("Excuse is null")
+						Resource.Fail("Excuse list is null or empty")
 					}
 				} else {
 					Resource.Fail("Unsuccessful response: ${response.code()}")
@@ -28,4 +27,5 @@ class ExcuseRepository(private val excuseService: ExcuseService) {
 				Resource.Error(e.message.orEmpty())
 			}
 		}
+
 }

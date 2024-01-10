@@ -7,5 +7,6 @@ import retrofit2.http.Path
 
 interface ExcuseService {
 	@GET("{category}")
-	suspend fun getExcuseByCategory(@Path("category") category: String): Response<GetExcuseResponse>
+	suspend fun getExcuseByCategory(@Path("category") category: String): Response<List<GetExcuseResponse>>
 }
+

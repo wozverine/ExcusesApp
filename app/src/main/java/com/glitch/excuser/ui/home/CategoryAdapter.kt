@@ -14,14 +14,14 @@ class CategoryAdapter(
 	override fun onCreateViewHolder(
 		parent: ViewGroup,
 		viewType: Int
-	): CategoryAdapter.CategoryViewHolder {
+	): CategoryViewHolder {
 		return CategoryViewHolder(
 			ItemCategoryRvBinding.inflate(LayoutInflater.from(parent.context), parent, false),
 			onCategoryClick
 		)
 	}
 
-	override fun onBindViewHolder(holder: CategoryAdapter.CategoryViewHolder, position: Int) {
+	override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
 		holder.bind(getItem(position))
 	}
 

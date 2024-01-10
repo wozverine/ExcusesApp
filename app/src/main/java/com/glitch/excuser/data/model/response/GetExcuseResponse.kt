@@ -4,4 +4,4 @@ data class GetExcuseResponse (
 	val id: Int,
 	val excuse: String,
 	val category: String
-) : BaseResponse()
+)

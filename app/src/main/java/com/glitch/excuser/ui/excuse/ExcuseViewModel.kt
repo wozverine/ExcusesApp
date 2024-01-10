@@ -18,7 +18,7 @@ class ExcuseViewModel @Inject constructor(
 	private var _excuseState = MutableLiveData<ExcuseState>()
 	val excuseState: LiveData<ExcuseState> get() = _excuseState
 
-	private var excuseData: GetExcuseResponse? = null
+	private var excuseData: List<GetExcuseResponse>? = null
 
 	fun getExcuse(category: String) = viewModelScope.launch {
 		_excuseState.value = ExcuseState.Loading
@@ -34,9 +34,11 @@ class ExcuseViewModel @Inject constructor(
 	}
 }
 
+
 sealed interface ExcuseState {
 	data object Loading : ExcuseState
-	data class SuccessState(val excuseResponse: GetExcuseResponse) : ExcuseState
+	data class SuccessState(val excuseResponses: List<GetExcuseResponse>) : ExcuseState
 	data class EmptyScreen(val failMessage: String) : ExcuseState
 	data class ShowMessage(val errorMessage: String) : ExcuseState
 }
+

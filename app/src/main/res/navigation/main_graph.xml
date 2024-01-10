@@ -29,6 +29,7 @@
         android:name="com.glitch.excuser.ui.excuse.ExcuseFragment"
         android:label="fragment_excuse"
         tools:layout="@layout/fragment_excuse">
+        <!--suppress NavigationFile -->
         <argument
             android:name="category"
             app:argType="string" />

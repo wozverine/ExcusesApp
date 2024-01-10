@@ -11,4 +11,15 @@
     <string name="gaming">Gaming</string>
     <string name="children">Children</string>
     <string name="unbelievable">Unbelievable</string>
+
+    <string name="error">Error</string>
+    <string name="ok">OK</string>
+    <string name="another">Another excuse</string>
+    <string name="no_connection">No connection</string>
+    <string name="url">Source: https://excuser-three.vercel.app/</string>
+    <string name="language">Language</string>
+    <string name="current_language">eng</string>
+    <string name="tur">Turkish</string>
+    <string name="eng">English</string>
+    <string name="language_changed">Language changed</string>
 </resources>
