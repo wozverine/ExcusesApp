@@ -1,8 +1,8 @@
 package com.glitch.excuser.data.repository
 
 import com.glitch.excuser.common.Resource
-import com.glitch.excuser.data.source.remote.ExcuseService
 import com.glitch.excuser.data.model.response.GetExcuseResponse
+import com.glitch.excuser.data.source.remote.ExcuseService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -27,5 +27,4 @@ class ExcuseRepository(private val excuseService: ExcuseService) {
 				Resource.Error(e.message.orEmpty())
 			}
 		}
-
 }

@@ -1,10 +1,6 @@
 package com.glitch.excuser.di
 
 import android.content.Context
-import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.glitch.excuser.common.Constants.BASE_URL
 import com.glitch.excuser.data.source.remote.ExcuseService
@@ -16,44 +12,43 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
-import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    @Singleton
-    @Provides
-    fun provideChuckerInterceptor(@ApplicationContext context: Context) =
-        ChuckerInterceptor.Builder(context).build()
+	@Singleton
+	@Provides
+	fun provideChuckerInterceptor(@ApplicationContext context: Context) =
+		ChuckerInterceptor.Builder(context).build()
 
 	@Singleton
 	@Provides
-	fun provideOkHttp(chucker: ChuckerInterceptor, @ApplicationContext context: Context): OkHttpClient =
-		OkHttpClient.Builder().apply {
-			addInterceptor { chain ->
-				val sharedPref = context.getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
-				val language = sharedPref.getString("language", "eng") ?: "eng"
+	fun provideOkHttp(
+		chucker: ChuckerInterceptor, @ApplicationContext context: Context
+	): OkHttpClient = OkHttpClient.Builder().apply {
+		addInterceptor { chain ->
+			val sharedPref = context.getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
+			val language = sharedPref.getString("language", "eng") ?: "eng"
 
-				val builder = chain.request().newBuilder()
-				builder.header("language", language)
+			val builder = chain.request().newBuilder()
+			builder.header("language", language)
 
-				return@addInterceptor chain.proceed(builder.build())
-			}
-			addInterceptor(chucker)
-		}.build()
+			return@addInterceptor chain.proceed(builder.build())
+		}
+		addInterceptor(chucker)
+	}.build()
 
 	@Singleton
-    @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient) = Retrofit.Builder().apply {
+	@Provides
+	fun provideRetrofit(okHttpClient: OkHttpClient) = Retrofit.Builder().apply {
 		addConverterFactory(GsonConverterFactory.create())
 		baseUrl(BASE_URL)
 		client(okHttpClient)
 	}.build()
 
-    @Singleton
-    @Provides
-    fun provideExcuseService(retrofit: Retrofit) = retrofit.create(ExcuseService::class.java)
+	@Singleton
+	@Provides
+	fun provideExcuseService(retrofit: Retrofit) = retrofit.create(ExcuseService::class.java)
 }

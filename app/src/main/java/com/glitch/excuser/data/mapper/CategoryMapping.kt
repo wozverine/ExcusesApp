@@ -9,6 +9,6 @@ object CategoryMapping {
 		"oyun" to "gaming",
 		"ofis" to "office",
 		"parti" to "party",
-		"inanılmaz" to "unbelievable"
+		"i̇nanılmaz" to "unbelievable"
 	)
 }

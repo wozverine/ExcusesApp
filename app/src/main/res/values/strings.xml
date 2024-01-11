@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Excuser</string>
-    <string name="select">Select a category</string>
     <string name="categories">Categories</string>
 
     <string name="office">Office</string>
@@ -11,6 +10,7 @@
     <string name="gaming">Gaming</string>
     <string name="children">Children</string>
     <string name="unbelievable">Unbelievable</string>
+    <string name="unbelievable_fixed">unbelievable</string>
 
     <string name="error">Error</string>
     <string name="ok">OK</string>
@@ -26,5 +26,4 @@
     <string name="hin">Hindi</string>
     <string name="pt_br">Brazilian Portuguese</string>
     <string name="ben">Bengali</string>
-    <string name="language_changed">Language changed</string>
 </resources>

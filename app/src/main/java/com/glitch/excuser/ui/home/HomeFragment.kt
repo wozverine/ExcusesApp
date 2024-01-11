@@ -7,8 +7,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.glitch.excuser.R
 import com.glitch.excuser.data.mapper.CategoryMapping
@@ -22,6 +23,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 	private val binding get() = _binding!!
 
 	private lateinit var sharedPref: SharedPreferences
+
+	private val viewModel by viewModels<HomeViewModel>()
 
 	private val categoryAdapter = CategoryAdapter(
 		onCategoryClick = ::onCategoryClick
@@ -39,9 +42,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 		sharedPref = requireActivity().getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
 
 		if (sharedPref.getBoolean("firstTime", true)) {
-			sharedPref.edit().putString("language", getString(R.string.language)).apply()
+			sharedPref.edit().putString("language", getString(R.string.current_language)).apply()
 			sharedPref.edit().putBoolean("firstTime", false).apply()
 		}
+		observeData()
+		viewModel.changeLanguage(
+			buildString {
+				append(getString(R.string.language))
+				append(" : ")
+				append(sharedPref.getString("language", "eng"))
+			}
+		)
 
 		val categoryList: MutableList<String> =
 			mutableListOf(
@@ -58,11 +69,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 		with(binding) {
 			rvCategories.adapter = categoryAdapter
-			btnLanguage.text = buildString {
-				append(getString(R.string.language))
-				append(" : ")
-				append(sharedPref.getString("language","eng"))
-			}
+
 			btnLanguage.setOnClickListener {
 				showLanguageDialog()
 			}
@@ -74,10 +81,30 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 		_binding = null
 	}
 
+	private fun observeData() = with(binding) {
+		viewModel.homeState.observe(viewLifecycleOwner) { state ->
+			when (state) {
+				HomeState.Loading -> {
+					btnLanguage.isVisible = false
+				}
+
+				is HomeState.Language -> {
+					btnLanguage.text = state.language
+					btnLanguage.isVisible = true
+				}
+			}
+		}
+	}
+
 	private fun onCategoryClick(id: Int) {
 		val localizedCategory = categoryAdapter.currentList[id].lowercase()
-		val englishCategory =
+
+		val englishCategory = if(localizedCategory == getString(R.string.unbelievable)){
+			R.string.unbelievable_fixed.toString()
+		} else {
 			CategoryMapping.localizedToEnglish[localizedCategory] ?: localizedCategory
+		}
+
 		findNavController().navigate(
 			HomeFragmentDirections.actionHomeFragmentToExcuseFragment(englishCategory)
 		)
@@ -90,8 +117,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 		val dialog = builder.create()
 
 		with(dialogBinding) {
-			btnSelect.setOnClickListener() {
-				val push = when(rgLanguage.checkedRadioButtonId){
+			btnSelect.setOnClickListener {
+				val push = when (rgLanguage.checkedRadioButtonId) {
 					R.id.rbEng -> "eng"
 					R.id.rbTur -> "tr"
 					R.id.rbFrench -> "fren"
@@ -100,6 +127,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 					else -> "ben"
 				}
 				sharedPref.edit().putString("language", push).apply()
+				viewModel.changeLanguage(
+					buildString {
+						append(getString(R.string.language))
+						append(" : ")
+						append(sharedPref.getString("language", "eng"))
+					}
+				)
 				dialog.dismiss()
 			}
 		}

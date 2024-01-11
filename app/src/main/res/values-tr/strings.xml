@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Excuser</string>
-    <string name="select">Kategori seçiniz</string>
     <string name="categories">Kategoriler</string>
 
     <string name="office">Ofis</string>
@@ -12,6 +11,7 @@
     <string name="gaming">Oyun</string>
     <string name="children">Çocuklar</string>
     <string name="unbelievable">İnanılmaz</string>
+    <string name="unbelievable_fixed">unbelievable</string>
 
     <string name="error">Hata</string>
     <string name="ok">Tamam</string>
@@ -27,5 +27,4 @@
     <string name="hin">Hintçe</string>
     <string name="pt_br">Portekizce</string>
     <string name="ben">Bengali</string>
-    <string name="language_changed">Dil değişti</string>
 </resources>

@@ -25,8 +25,7 @@ class ExcuseFragment : Fragment(R.layout.fragment_excuse) {
 
 	private val args by navArgs<ExcuseFragmentArgs>()
 	override fun onCreateView(
-		inflater: LayoutInflater, container: ViewGroup?,
-		savedInstanceState: Bundle?
+		inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
 	): View {
 		_binding = FragmentExcuseBinding.inflate(inflater, container, false)
 		return binding.root
@@ -92,8 +91,7 @@ private fun isNetworkConnected(context: Context): Boolean {
 		context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
 	val networkCapabilities = connectivityManager.activeNetwork ?: return false
-	val actNw =
-		connectivityManager.getNetworkCapabilities(networkCapabilities) ?: return false
+	val actNw = connectivityManager.getNetworkCapabilities(networkCapabilities) ?: return false
 
 	return actNw.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
 }

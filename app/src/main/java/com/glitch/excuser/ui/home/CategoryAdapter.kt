@@ -12,8 +12,7 @@ class CategoryAdapter(
 	private val onCategoryClick: (Int) -> Unit
 ) : ListAdapter<String, CategoryAdapter.CategoryViewHolder>(CategoryDiffUtilCallBack()) {
 	override fun onCreateViewHolder(
-		parent: ViewGroup,
-		viewType: Int
+		parent: ViewGroup, viewType: Int
 	): CategoryViewHolder {
 		return CategoryViewHolder(
 			ItemCategoryRvBinding.inflate(LayoutInflater.from(parent.context), parent, false),
@@ -26,8 +25,7 @@ class CategoryAdapter(
 	}
 
 	class CategoryViewHolder(
-		private val binding: ItemCategoryRvBinding,
-		private val onCategoryClick: (Int) -> Unit
+		private val binding: ItemCategoryRvBinding, private val onCategoryClick: (Int) -> Unit
 	) : RecyclerView.ViewHolder(binding.root) {
 		fun bind(category: String) {
 			with(binding) {
@@ -41,8 +39,7 @@ class CategoryAdapter(
 						4 -> R.drawable.gaming
 						5 -> R.drawable.office
 						6 -> R.drawable.party
-						else ->
-							R.drawable.unbelievable
+						else -> R.drawable.unbelievable
 					}
 				)
 

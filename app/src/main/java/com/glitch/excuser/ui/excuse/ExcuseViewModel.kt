@@ -28,6 +28,7 @@ class ExcuseViewModel @Inject constructor(
 				excuseData = result.data
 				ExcuseState.SuccessState(result.data)
 			}
+
 			is Resource.Fail -> ExcuseState.EmptyScreen(result.failMessage)
 			is Resource.Error -> ExcuseState.ShowMessage(result.errorMessage)
 		}
