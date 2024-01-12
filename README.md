@@ -1,6 +1,9 @@
 # Excuser
 An excuse finder app. Data is fetched from Excuser API.  
 
+![promotional eng](https://github.com/wozverine/ExcusesApp/assets/23726873/ef859f8d-eb9a-40fc-86f7-8c2e0a63e094)
+
+
 ## Project Features
 - [x] MVVM with Clean Architecture
 - [x] Coroutines
@@ -21,6 +24,12 @@ API website: https://excuser-three.vercel.app/
 | Excuse - 1 | Excuse - 2 | Excuse -3 |
 | ------ | ------ | ----- |
 ![4](https://github.com/wozverine/ExcusesApp/assets/23726873/7a704516-3bac-46fa-a0c4-f1c26e4c52be)|![5](https://github.com/wozverine/ExcusesApp/assets/23726873/e9313d6b-c2bf-4789-907f-b6e25f4a80c0)|![6](https://github.com/wozverine/ExcusesApp/assets/23726873/604b2321-228c-478c-9915-5f17df6090ec)|
+
+## PLAY STORE
+Link: Waiting to be published
+
+
+
 
 ## CREDITS:
 
