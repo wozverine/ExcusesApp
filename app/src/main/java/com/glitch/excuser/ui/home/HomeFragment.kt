@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.glitch.excuser.R
-import com.glitch.excuser.data.mapper.CategoryMapping
 import com.glitch.excuser.databinding.DialogChangeLanguageBinding
 import com.glitch.excuser.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -97,16 +96,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 	}
 
 	private fun onCategoryClick(id: Int) {
-		val localizedCategory = categoryAdapter.currentList[id].lowercase()
-
-		val englishCategory = if(localizedCategory == getString(R.string.unbelievable)){
-			R.string.unbelievable_fixed.toString()
-		} else {
-			CategoryMapping.localizedToEnglish[localizedCategory] ?: localizedCategory
-		}
-
+		val localizedCategory = categoryAdapter.currentList[id]
 		findNavController().navigate(
-			HomeFragmentDirections.actionHomeFragmentToExcuseFragment(englishCategory)
+			HomeFragmentDirections.actionHomeFragmentToExcuseFragment(localizedCategory)
 		)
 	}
 

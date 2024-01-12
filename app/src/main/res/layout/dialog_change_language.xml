@@ -43,7 +43,6 @@
             android:layout_height="wrap_content"
             android:text="@string/pt_br" />
         <RadioButton
-            android:id="@+id/rbBen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ben" />

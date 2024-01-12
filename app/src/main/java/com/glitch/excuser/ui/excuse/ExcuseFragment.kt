@@ -4,7 +4,6 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.glitch.excuser.R
+import com.glitch.excuser.data.mapper.CategoryMapping
 import com.glitch.excuser.databinding.FragmentExcuseBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,11 +34,19 @@ class ExcuseFragment : Fragment(R.layout.fragment_excuse) {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		viewModel.getExcuse(args.category)
+		val localizedCategory = args.category.lowercase()
+		val englishCategory = if (localizedCategory == getString(R.string.unbelievable)) {
+			R.string.unbelievable_fixed.toString()
+		} else {
+			CategoryMapping.localizedToEnglish[localizedCategory] ?: localizedCategory
+		}
+
+		viewModel.getExcuse(englishCategory)
 		observeData()
 		with(binding) {
+			tvCategory.text = args.category
 			btnAnother.setOnClickListener {
-				viewModel.getExcuse(args.category)
+				viewModel.getExcuse(englishCategory)
 			}
 		}
 	}
@@ -58,26 +66,28 @@ class ExcuseFragment : Fragment(R.layout.fragment_excuse) {
 		viewModel.excuseState.observe(viewLifecycleOwner) { state ->
 			when (state) {
 				ExcuseState.Loading -> {
+					tvExcuse.isVisible = false
 					progressBar.isVisible = true
 					btnAnother.isVisible = false
 				}
 
 				is ExcuseState.SuccessState -> {
 					tvExcuse.text = state.excuseResponses[0].excuse
+					tvExcuse.isVisible = true
 					progressBar.isVisible = false
 					btnAnother.isVisible = true
 				}
 
 				is ExcuseState.EmptyScreen -> {
-					Log.d("ExcuseFragment", "Empty Screen: ${state.failMessage}")
 					tvExcuse.text = getString(R.string.error)
+					tvExcuse.isVisible = true
 					progressBar.isVisible = false
 					btnAnother.isVisible = false
 				}
 
 				is ExcuseState.ShowMessage -> {
-					Log.d("ExcuseFragment", "Show Message: ${state.errorMessage}")
 					tvExcuse.text = getString(R.string.error)
+					tvExcuse.isVisible = true
 					progressBar.isVisible = false
 					btnAnother.isVisible = false
 				}

@@ -1,7 +1,6 @@
 package com.glitch.excuser.di
 
 import android.content.Context
-import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.glitch.excuser.common.Constants.BASE_URL
 import com.glitch.excuser.data.source.remote.ExcuseService
 import dagger.Module
@@ -17,16 +16,10 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-
-	@Singleton
-	@Provides
-	fun provideChuckerInterceptor(@ApplicationContext context: Context) =
-		ChuckerInterceptor.Builder(context).build()
-
 	@Singleton
 	@Provides
 	fun provideOkHttp(
-		chucker: ChuckerInterceptor, @ApplicationContext context: Context
+		@ApplicationContext context: Context
 	): OkHttpClient = OkHttpClient.Builder().apply {
 		addInterceptor { chain ->
 			val sharedPref = context.getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
@@ -37,7 +30,6 @@ object NetworkModule {
 
 			return@addInterceptor chain.proceed(builder.build())
 		}
-		addInterceptor(chucker)
 	}.build()
 
 	@Singleton
