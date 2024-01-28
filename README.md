@@ -26,7 +26,7 @@ API website: https://excuser-three.vercel.app/
 ![4](https://github.com/wozverine/ExcusesApp/assets/23726873/7a704516-3bac-46fa-a0c4-f1c26e4c52be)|![5](https://github.com/wozverine/ExcusesApp/assets/23726873/e9313d6b-c2bf-4789-907f-b6e25f4a80c0)|![6](https://github.com/wozverine/ExcusesApp/assets/23726873/604b2321-228c-478c-9915-5f17df6090ec)|
 
 ## PLAY STORE
-Link: Waiting to be published
+Link: [Waiting to be published](https://play.google.com/store/apps/details?id=com.glitch.excuser)
 
 
 
